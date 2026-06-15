@@ -1,10 +1,23 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 
+const userRoutes = require('./routes/userRoutes');
+const groupRoutes = require('./routes/groupRoutes');
+const expenseRoutes = require('./routes/expenseRoutes');
+const { errorHandler } = require('./middleware/errorHandler');
+
 app.use(express.json());
 
-const dbURI = 'mongodb+srv://supriya_admin:QOzTqsk5yg1SrkKW@cluster0.7smkffa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+app.use('/api/users', userRoutes);
+app.use('/api/groups', groupRoutes);
+app.use('/api/expenses', expenseRoutes);
+
+// Centralized error handler mounted last
+app.use(errorHandler);
+
+const dbURI = process.env.MONGODB_URI;
 
 console.log("Attempting to connect to MongoDB...");
 
