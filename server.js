@@ -5,6 +5,7 @@ const app = express();
 app.use(express.json());
 
 const dbURI = 'mongodb+srv://supriya_admin:QOzTqsk5yg1SrkKW@cluster0.7smkffa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
 console.log("Attempting to connect to MongoDB...");
 
 mongoose.connect(dbURI)
