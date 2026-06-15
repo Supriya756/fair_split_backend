@@ -1,10 +1,19 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 
 app.use(express.json());
 
+const dbURI = 'mongodb+srv://supriyamaity99533_db_user:fDQdMuufMVKRML0P@cluster0.7smkffa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
+console.log("Attempting to connect to MongoDB...");
+
+mongoose.connect(dbURI)
+    .then(() => console.log('Successfully connected to MongoDB Atlas!'))
+    .catch((err) => console.error('CRITICAL: MongoDB connection error:', err));
+
 app.get('/', (req, res) => {
-    res.send('FairSplit Backend is Online!');
+    res.send('FairSplit Backend is Online and Connected to DB!');
 });
 
 const PORT = process.env.PORT || 3000;
